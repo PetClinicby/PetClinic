@@ -1,1 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: 
+      - main
+  pull_request:
+    branches:
+      - main
+      - Dev-env
+
+jobs:
+  build:
+    if: startsWith(github.head_ref, 'feature/')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-m2-
+
+      - name: Build and test
+        run: mvn clean verify
+
+      - name: Check code formatting
+        run: mvn spotless:check
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          args: >
+            -Dsonar.projectKey=YourProjectKey
+            -Dsonar.organization=YourOrganization
 
