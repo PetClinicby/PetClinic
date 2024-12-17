@@ -1,13 +1,9 @@
 name: CI
 
 on:
-  push:
-    branches: 
-      - main
   pull_request:
     branches:
-      - main
-      - Dev-env
+      - dev-env
 
 jobs:
   build:
@@ -44,6 +40,6 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           args: >
-            -Dsonar.projectKey=YourProjectKey
-            -Dsonar.organization=YourOrganization
+            -Dsonar.projectKey=PetClinicby_PetClinic
+            -Dsonar.organization=Ypetclinicby
 
