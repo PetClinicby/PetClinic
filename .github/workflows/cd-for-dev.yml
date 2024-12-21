@@ -3,7 +3,7 @@ name: CD for Dev
 on:
   push:
     branches:
-      - dev-env
+      - main
 
 jobs:
   build_push_update:
