@@ -42,7 +42,8 @@ jobs:
 
       - name: Update image tag in deployment manifest
         run: |
-          sed -i 's|image: vhmds/petclinic:.*|image: vhmds/petclinic:'"${{ env.SHORT_SHA }}"'|g' petclinic-deployment.yml
+          sed -i 's|image: vhmds/petclinic.*|image: vhmds/petclinic:'"${{ env.SHORT_SHA }}"'|g' petclinic-deployment.yml
+          cat petclinic-deployment.yml 
 
       - name: Commit and push changes
         run: |
