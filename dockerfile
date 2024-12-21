@@ -16,3 +16,5 @@ ENV SPRING_DATASOURCE_URL=jdbc:postgresql://petclinic-postgres:5432/petclinic
 ENV SPRING_DATASOURCE_USERNAME=petclinic
 ENV SPRING_DATASOURCE_PASSWORD=petclinic
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
+
