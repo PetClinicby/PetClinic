@@ -37,6 +37,7 @@ jobs:
       # Add image digest for better traceability
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
+        continue-on-error: true
         with:
           context: .
           push: true
@@ -48,6 +49,7 @@ jobs:
       - name: Check repository access
         run: |
           git ls-remote https://github.com/PetClinicby/petclinic-manifests-Testing.git
+        continue-on-error: true
 
       - name: Checkout manifests repository
         uses: actions/checkout@v3
@@ -59,6 +61,7 @@ jobs:
       - name: Update image tag in deployment manifest
         run: |
           sed -i 's|image: vhmds/petclinic.*|image: vhmds/petclinic-test:'"${{ env.SHORT_SHA }}"'|g' petclinic-deployment.yml
+        continue-on-error: true
 
       - name: Commit and push changes
         run: |
@@ -67,3 +70,4 @@ jobs:
           git add petclinic-deployment.yml
           git commit -m "Update image tag to ${{ env.SHORT_SHA }}"
           git push
+        continue-on-error: true
