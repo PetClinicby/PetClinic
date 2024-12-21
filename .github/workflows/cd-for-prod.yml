@@ -1,4 +1,4 @@
-name: CD for Testing
+name: CD for Prod
 
 on:
   push:
