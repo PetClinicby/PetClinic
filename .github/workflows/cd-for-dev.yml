@@ -29,6 +29,9 @@ jobs:
         run: |
           docker build -t vhmds/petclinic:${{ env.SHORT_SHA }} .
           docker push vhmds/petclinic:${{ env.SHORT_SHA }}
+      - name: Check repository access
+        run: |
+          git ls-remote https://github.com/PetClinicby/petclinic-manifests-Dev.git
 
       - name: Checkout manifests repository
         uses: actions/checkout@v3
