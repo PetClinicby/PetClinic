@@ -46,6 +46,9 @@ jobs:
           args: >
             -Dsonar.projectKey=PetClinicby_PetClinic
             -Dsonar.organization=Ypetclinicby
+            -Dsonar.java.coveragePlugin=jacoco
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.junit.reportPaths=target/surefire-reports,target/failsafe-reports
 
   build-test:
     if: github.base_ref == 'test-env' && github.head_ref == 'dev-env'
@@ -82,6 +85,9 @@ jobs:
           args: >
             -Dsonar.projectKey=PetClinicby_PetClinic
             -Dsonar.organization=Ypetclinicby
+            -Dsonar.java.coveragePlugin=jacoco
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.junit.reportPaths=target/surefire-reports,target/failsafe-reports
       - name: Run Integration Tests
         run: mvn failsafe:integration-test
         continue-on-error: true
@@ -135,7 +141,6 @@ jobs:
         with:
           name: performance-reports
           path: target/jmeter/results/**
-          retention-days: 14
 
   build-prod:
     if: github.base_ref == 'main' && github.head_ref == 'test-env'
@@ -175,6 +180,9 @@ jobs:
           args: >
             -Dsonar.projectKey=PetClinicby_PetClinic
             -Dsonar.organization=Ypetclinicby
+            -Dsonar.java.coveragePlugin=jacoco
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+            -Dsonar.junit.reportPaths=target/surefire-reports,target/failsafe-reports
       - name: Run Integration Tests
         run: mvn failsafe:integration-test
         continue-on-error: true
@@ -231,4 +239,3 @@ jobs:
         with:
           name: performance-reports
           path: target/jmeter/results/**
-          retention-days: 14
