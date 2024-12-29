@@ -18,3 +18,7 @@ ENV SPRING_DATASOURCE_PASSWORD=petclinic
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
+
+
+
+
