@@ -231,4 +231,3 @@ jobs:
         with:
           name: performance-reports
           path: target/jmeter/results/**
-          retention-days: 14
